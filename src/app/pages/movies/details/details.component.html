@@ -1,0 +1,35 @@
+<div class="content" role="main">
+    <h1>{{movie.title}}</h1>
+</div>
+
+<hr />
+<div class="details-body">
+    <ngb-carousel>
+        <ng-template *ngFor="let image of movie.images" ngbSlide>
+            <img [src]="image.url" class="img-fluid rounded mx-auto d-block" alt="Poster">
+        </ng-template>
+    </ngb-carousel>
+    <div>
+        {{movie.description}}
+    </div>
+    <hr />
+    <div class="badge badge-light" *ngFor="let tag of movie.tags">{{tag.label}}
+    </div>
+    <hr />
+    <div *ngIf="movie.languages && movie.languages.length>0">
+            <h4>Available In</h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4" *ngFor="let language of movie.languages">
+                        <a class="btn btn-primary" href="javascript:void(0)">{{language}}</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <br/>
+    <div class="container" *ngIf="movie.downloadable">
+        <div class="row">
+            <button class="btn btn-success">Download</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="content" role="main">
+    <h1>Movie Listing</h1>
+    <form [formGroup]="selectMovieTypeForm">
+        <select formControlName="movieType" (change)="onSelectChanged($event)">
+            <option value="" disabled>Choose Movie Type</option>
+            <option *ngFor="let type of movieTypes" [value]="type">
+                {{type}}
+            </option>
+        </select>
+    </form>
+
+</div>
+<hr />
+
+<div class="row-listing" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()" [infiniteScrollDisabled]="isFullListDisplayed" [scrollWindow]="false">
+
+    <div *ngFor="let row of displayedRows" >
+        <h2>{{row.row_name}}</h2>
+        <div class="scrollmenu">
+            <a *ngFor="let movie of row.data" routerLink="/movies/details" [queryParams]="{'movieId': movie.id}">
+                <div class="card">
+                    <img [src]="movie.images? movie.images[0].url: ''" alt="Avatar">
+                    <h4>{{movie.title}}</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
